@@ -1,0 +1,3 @@
+Reading config file at relative path: EcoSynsUrlFile.txt
+Total URL 136
+Next Schedule In:  2023-02-07 20:14:28.206553144 +0100 WAT m=+1956.434039777
