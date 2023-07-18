@@ -1,4 +1,4 @@
-package Splintscraper
+package Artscraper
 
 import (
 	"bufio"
@@ -212,7 +212,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			value = data["parent_author"]
 
-			reg1 := regexp.MustCompile("((onthemountain)|(freed99)|(hiveborgminer)|(ydaiznfts)|(bokica80)|(spectrumecons)|(bechibenner)|(phortun)|(pundito)|(oadissin))")
+			reg1 := regexp.MustCompile("((oadissin)|(casimodo)|(hermansa)|(fikif)|(thalibul)|(ybf))")
 			for _, authValue := range value {
 				if reg1.MatchString(authValue) {
 
@@ -241,10 +241,9 @@ func (stock *product) collectedata(data map[string][]string) {
 			if _, ok := data["title"]; ok {
 				value = data["title"]
 
-				//reg1 := regexp.MustCompile("(.+(gondek).+|.+(abilitie).+|.+(land).+|.+(focus).+|.+(chest).+|.+(art).+|.+(league).+|.+(quest).+|.+(challenge).+|.+(mage).+|.+(report).+|.+(lolz).+|.+(powerup).+|.+(hive).+|.+(risingstar).+|.+(virtualgrowth).+|.+(star).+|.+(rising).+|.+(crop).+|.+(woo).+|.+(alive).+|.+(chess).+|.+(phortun).+|.+(woogame).+|.+(euro).+|.+(goldquizblog).+|.+(hashkings).+)")
+				//reg1 := regexp.MustCompile("(.*(hh guild).*|.*(weed).*|.*(gimmi).*|.*(mage).*|.*(lolz).*|.*(powerup).*|.*(psyber).*|.*(risingstar).*|.*(virtualgrowth).*|.*(star).*|.*(rising).*|.*(crop).*|.*(woo).*|.*(chess).*|.*(phortun).*|.*(woogame).*|.*(euro).*|.*(goldquizblog).*|.*(hashkings).*)")
 
-				reg1 := regexp.MustCompile("(.*(hh guild).*|.*(terracor).*|.*(weed).*|.*(gimmi).*|.*(mage).*|.*(art).*|.*(lolz).*|.*(powerup).*|.*(psyber).*|.*(risingstar).*|.*(virtualgrowth).*|.*(star).*|.*(rising).*|.*(crop).*|.*(woo).*|.*(alive).*|.*(chess).*|.*(phortun).*|.*(woogame).*|.*(euro).*|.*(goldquizblog).*|.*(hashkings).*)")
-
+				reg1 := regexp.MustCompile("(.*(actifit).*)")
 				for _, value2 := range value {
 
 					value2 = strings.ToLower(value2)
@@ -253,7 +252,6 @@ func (stock *product) collectedata(data map[string][]string) {
 						stock.Title = ""
 						break
 
-						//} else if !reg1.MatchString(value2) && value2 != "Splinterlands" && value2 != "RE:" && value2 != "" {
 					} else if !reg1.MatchString(value2) && value2 != "" {
 
 						//if value2 != "Splinterlands" && value2 != "RE:" && value2 != "" {
@@ -280,7 +278,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			valueB := data["created"]
 			var valueC, valueD []string
 
-			dayAgoTime1 := time.Now().AddDate(0, 0, -1).Format("2006-01-02T15:04:05")
+			dayAgoTime1 := time.Now().AddDate(0, 0, -4).Format("2006-01-02T15:04:05")
 
 			dayAgoTime, _ := time.Parse("2006-01-02T15:04:05", dayAgoTime1)
 
@@ -323,15 +321,12 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			value = data["pathname"]
 
-			//reg1 := regexp.MustCompile("(.+(mage).+|.+(art).+|.+(report).+|.+(risingstar).+|.+(virtualgrowth).+|.+(star).+|.+(rising).+|.+(dcrops).+|.+(crop).+|.+(hivechess).+|.+(phortun).+|.+(wrestling).+|.+(woo).+|.+(euro).+|.+(goldquizblog).+|.+(hashkings).+)")
-
-			reg1 := regexp.MustCompile("(.+(giveaw).+|.+(delegat).+|.+(free ).+|.+(hsbi).+|.+(raffle).+|.+(kojiri).+)")
+			reg1 := regexp.MustCompile("(.+(contes).+|.+(challeng).+|.+(concou).+|.+(compet).+)")
 
 			reg2 := regexp.MustCompile("(.+@)")
 
 			if reg1.MatchString(value[0]) {
 
-				//v1 := strings.ReplaceAll(value[0], "/hive-13323/@", "https://ecency.com/@")
 				v1 := reg2.ReplaceAllString(value[0], "https://ecency.com/@")
 
 				stock.Url = v1
@@ -352,8 +347,6 @@ func (stock *product) collectedata(data map[string][]string) {
 			valueC := []string{}
 
 			for _, valueA := range value {
-
-				//reg1 := regexp.MustCompile("(.+(risingstar).+|.+(virtualgrowth).+|.+(star).+|.+(rising).+)")
 
 				reg2 := regexp.MustCompile("https.+(i.imgur|DQmXJux2kvzMb5n2ooQKy7f3rzx9fcsHPsUddWaGjXehL3f/giveaway5k|DQmaJ7PZXJZJu2vJ3eGrXQ4tQLamvUnLHhqjkkbVEdEDpzb/902c291e9d0c9f48fa80e85523c6401de12caf65efc761c2dad4adefa4bae1eb|23w2cNG3rWNgyzkbBCCKxZMuaPHhadpoJHXqjB7ZitTK6ZcjMzAad6wSXs9BSgu2YWgU2|(lolztoken.+lolz)).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
 
@@ -400,25 +393,87 @@ func (stock *product) collectedata(data map[string][]string) {
 
 }
 
+func collectUserNames(urls []string) []string {
+	var usernames []string
+	for _, url := range urls {
+
+		reg1 := regexp.MustCompile("@[a-z0-9-.]+")
+
+		user := reg1.FindString(url)
+
+		usernames = append(usernames, user)
+
+	}
+
+	return noduplicate(usernames)
+
+}
+
+func filterLinksTounique(urls []string) []string {
+
+	var uniqueUrls []string
+
+	//var collectedUrls []string
+
+	data := make(map[string][]string)
+
+	usernames := collectUserNames(urls)
+
+	for i, username := range usernames {
+
+		if i < len(usernames)+1 {
+
+			for _, url := range urls {
+
+				if strings.Contains(url, username) {
+
+					data[username] = append(data[username], url)
+
+				}
+
+			}
+
+			for key, experience := range data {
+				if key == username {
+					experience = data[key]
+
+					uniqueUrls = append(uniqueUrls, fmt.Sprint(experience[0]))
+
+				}
+
+			}
+
+			i++
+
+		}
+
+	}
+
+	return noduplicate(uniqueUrls)
+
+}
+
 func Initialized() {
 
-	var blurtUrls []string
+	var blockUrls []string
 
-	blurtUrls1 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintConnectLinkScrape.txt")
+	blockUrls1 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt")
 
-	blurtUrls2 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplinterPosts")
+	blockUrls2 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artposts")
 
-	blurtUrls = append(blurtUrls, blurtUrls1...)
-	blurtUrls = append(blurtUrls, blurtUrls2...)
-	blurtUrls = noduplicate(blurtUrls)
+	blockUrls = append(blockUrls, blockUrls1...)
+	blockUrls = append(blockUrls, blockUrls2...)
+	blockUrls = noduplicate(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
+	blockUrls = filterLinksTounique(blockUrls)
+
+	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artlivescrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fileStoredata.Close()
 
-	fmt.Println("Total URL", len(blurtUrls))
+	fmt.Println("Total URL", len(blockUrls))
 
 	const headtext string = `
 <div class="text-justify">
@@ -431,49 +486,45 @@ func Initialized() {
 
 <div class="text-justify">
 
-How was your adventure since the season reset?
 
-My guess is that your progression is as smooth as mine or other Splinter Warriors.
+How are you doing on this beautiful morning?
 
-I hope that your season reward is great and will remain diverse and rich in powerful cards.
+The art contest article and participants' entries identification has never been easier.
 
-I have enjoyed my adventure since players entered this season of Splinterlands. My experience is not as awesome as I would like but it is all about the journey and less about the destination.
+I tried to collect the maximum of publications within the last five days on the Hive ecosystem.
 
-Enjoy your campaign and achieve your goals. The season is full of surprises great Warriors on Pretoria Lands.
+All contest posts missed in the review are considered a contribution and welcome in the comment section.
+
+Enjoy your venture into this wonderful universe of creativity on Hive.
 
 
 <div class="text-center">
 
-[![freeimageSource](https://images.hive.blog/500x0/https://files.peakd.com/file/peakd-hive/oadissin/23wgRuXqeKYgchLaNsWcg2CbB8NapA5mTwVVKSfHazXn2xycK2ShKvxvSnBhtkoULU6nv.png)](https://peakd.com/@oadissin/posts)
+[![freeimageSource](https://files.peakd.com/file/peakd-hive/ybf/242NfAmkdjKdxEJdWxWvdrtz3K955ydTjqep8ZSjZVKdKUtwjM5MvJayGg8fzkfqdDajS.gif)](https://www.canva.com/design/DAFhY98LjxA/bk-QSDT3l92E-VfJcYZynw/edit?utm_content=DAFhY98LjxA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 </div>
 
 --
 
-The Splinterlands directory is a compilation of articles searched and filtered through hundreds of contests, delegations, and giveaway-related publication on Hive.
+The compilation of articles searched and filtered through hundreds of contests, and publications related to art topics on Hive.
 
-I can assure you that it can be difficult to navigate the chaotic content feed to target one specific category of publication. Also, it is time-consuming to find an active contest each day.
-
-Splinterlands players have the opportunity to read a brief report on a recent contest posted on Hive. I keep the directory updated so that community members can easily participate in various worthwhile Splinterlands activities hosted on the blockchain.
-
+I hope that this list will grow as the community adds the articles that I have missed in this weekly project. 
 
 
 --
 
 <div class="text-justify">
 
-So I thought I should post and maintain here an updated directory of several contests, giveaways, or raffles related to Splinterlands.
+So I thought I should post and maintain here an updated directory of several contests, call to action, or raffles related to arts.
 
-The community members are welcome to participate in updating this list. By doing so this project can achieve its community goals.
+The community members are welcome to participate in updating this list. By doing so this project can achieve the main goal as a reference to all bloggers.
 
-*I have been thinking about a "tag" that can be used to easily identify items similar to those in the list below: "#splinterlandsgiveaways"
 
-**I invite authors to suggest a better tag or use #splinterlandsgiveaways in the list of tags before submitting the article
+--
 
 
 <div class="text-center">
 
-![](https://images.ecency.com/DQmeUyxbYf52V7k5Kw8gS6NJdc5yFh34x3YvifyP97FxzXD/sp3.gif)
 
 --
 
@@ -481,13 +532,13 @@ The community members are welcome to participate in updating this list. By doing
 
 <div class="text-center">
 
-Here we go...
+Enjoy...
 
 </div>
 
 <div class="text-center">
 
-* - * - * - *
+..*..*..*..*..*..*
 </div>
 
 <div class="text-justify">
@@ -497,41 +548,36 @@ Here we go...
 
 <div class="text-center">
 
-- * - * - * - * -
+..*..*..*..*..*..*..*
 
 </div>
 
-<div class="text-center">
 
 
-![](https://images.ecency.com/DQmNr7UUfiRZPVRkGpPDAhwLku3inZ23UVfGKkyG1AzY5Me/18.gif)
-
-
-</div>
 
 <div class="text-justify"> 
 
-The main page of the author's account may present up-to-date contests that were not mentioned in this publication.
 
+The entries here in our review list can motivate you all the engage with the authors and even join the event by checking the community hosting the event. 
 
-Please check your favorite contest author’s profile to place your entry as early as possible.
+Please check your favorite contest main page to place your entry before the deadline.
 </div>
 
 
 <div class="text-center">
 
 
-[![freeimageSource](https://images.hive.blog/500x0/https://images.ecency.com/DQmUfC6jgWDuLBcFAQiDAWkPPqAPJuuQhvHZh8iN7yeS8eo/splinterlandsdirectorycontest.png)](https://peakd.com/@oadissin/posts)
+[![freeimageSource](https://images.hive.blog/500x0/https://files.peakd.com/file/peakd-hive/ybf/23xeva1tAhfSdq9cFuta72ybuBVe7s7WbZg4jgzjYdkjppVySw6JE5DZpXbVfUZNvhA8g.jpg)](https://www.canva.com/design/DAFhY98LjxA/bk-QSDT3l92E-VfJcYZynw/edit?utm_content=DAFhY98LjxA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
 </div>
 
-Feel free to read more about the contest I share on my blog. Please visit the following blog page.
+Feel free to read more about previous art-reviewed articles on my Hive publication page. Please visit the following blog page.
 
 
 <div class="text-center"> 
 
-++[Blog Profile](https://ecency.com/@oadissin/posts)++
+++[Blog Profile](https://ecency.com/@ybf/posts)++
 
 </div>
 
@@ -542,13 +588,13 @@ Feel free to read more about the contest I share on my blog. Please visit the fo
 ## Warm regards
 </div>
 
-Delegation - Raffles - Giveaways: 20+ Updated Contests // Directory #️⃣ 110
+Weekly Art - Contest + Entries Recap: 90+ CreativeWork // Issue n.4
 
-splinterlands spt play2earn indiaunited ocd thgaming play2own oneup neoxian leofinance alive pgm pimp proofofbrain meme waiv contests hiveengine archon cent vyb ctp trliste hhguild
+art photofeed creativecoin photography arte contests challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
 
 Description
 
-How are you doing Splinterlands warriors? Here are some giveaways and contests links gathered from Splinterlands World of articles.
+How are you doing Art Fan on Hive? Here are some Challenge for the current week contests. The links gathered from multiple communities on Hive.
 `
 
 	w := bufio.NewWriter(fileStoredata)
@@ -560,17 +606,15 @@ How are you doing Splinterlands warriors? Here are some giveaways and contests l
 
 	var collinfo product
 
-	for _, blurtPost := range blurtUrls {
+	for _, blurtPost := range blockUrls {
 
 		postCodeSource := scrapesource(blurtPost)
 		collinfo.collectedata(postCodeSource)
 
 		if collinfo.Title != "" && collinfo.Images != "" && collinfo.Url != "" && collinfo.Voters != "" && collinfo.Authors != "" && len(collinfo.PostAge) != 0 {
 
-			dataToStore2 := fmt.Sprintf("\n☎☎☎\n%s\n\n<div class=\"text-center\">\n\n[![](https://images.hive.blog/450x0/%s)](%s)\n</div>\nPosted Since: %s\n\nVoted By %s Hive Bloggers\nArticle Creator: %s\n", collinfo.Title, collinfo.Images, collinfo.Url, collinfo.PostAge[:], collinfo.Voters, collinfo.Authors)
+			dataToStore2 := fmt.Sprintf("\n (•◡•) /\n%s\n\n<div class=\"text-center\">\n\n[![](https://images.hive.blog/450x0/%s)](%s)\n</div>\nPosted Since: %s\n\nVoted By %s Hive Bloggers\nArticle Creator: %s\n", collinfo.Title, collinfo.Images, collinfo.Url, collinfo.PostAge[:], collinfo.Voters, collinfo.Authors)
 
-			//if (collinfo.Images != "" && collinfo.Url != "" && collinfo.Voters != "" && collinfo.Authors != "") || (collinfo.Title != "") {
-			//dataToStore2 := fmt.Sprintf("\nN. %d\n%s\n\n<div class=\"text-center\">\n\n [![](%s)](%s)\n</div>\n\nVoted By %s Blurtians\nArticle Creator: %s\n", i+1, collinfo.Title, collinfo.Images, collinfo.Url, collinfo.Voters, collinfo.Authors)
 			_, _ = w.WriteString(dataToStore2)
 			w.Flush()
 		}
@@ -581,7 +625,7 @@ How are you doing Splinterlands warriors? Here are some giveaways and contests l
 	_, _ = w.WriteString(dataToStore3)
 	w.Flush()
 
-	/*for _, blurtPost := range blurtUrls[:1] {
+	/*for _, blurtPost := range blockUrls[:1] {
 		fmt.Println(blurtPost)
 		z := scrapesource(blurtPost)
 		for k1, z1 := range z {
@@ -611,7 +655,8 @@ func Cronjob() {
 /*
 Filtration
 
-Date to KEEP
+Date to topic
 
-\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*2022\-12\-[0][1-2].*2022\-12\-[0][1-2].*\n.*\n.*\n.*
+\n.*•◡•\).*\n.*\n.*\n.*\n.*\n.*((contes)|(challenge)).*\n.*\n.*\n.*\n.*\n.*
+
 */

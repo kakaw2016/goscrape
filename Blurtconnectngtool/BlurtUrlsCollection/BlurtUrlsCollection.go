@@ -123,7 +123,7 @@ func (stock *product) collectedata(data map[string][]string) []string {
 
 			value = data["url"]
 
-			reg := regexp.MustCompile("(psa-swap-blurt-activated-on-hive-engine-replacing-blurtlink)|(welcome-to-the-blurtaverse-get-your-avatar-now)|(social-etiquette-and-how-to-succeed-on-blurt)|(blurt-enginedrop-attestation-gamestate-megaverse)|(rh2c81)|(what-s-stopping-me-buying-more-blurt)|(ria9of)|(@blurtconnect-ng)|(@alejos7ven)|(@onchain-curator)|(@clixmoney)|(@tekraze)|(@saboin)|(@joviansummer)|(@lucylin)|(@phusionphil)")
+			reg := regexp.MustCompile("(psa-swap-blurt-activated-on-hive-engine-replacing-blurtlink)|(welcome-to-the-blurtaverse-get-your-avatar-now)|(social-etiquette-and-how-to-succeed-on-blurt)|(blurt-enginedrop-attestation-gamestate-megaverse)|(rh2c81)|(what-s-stopping-me-buying-more-blurt)|(ria9of)|(@blurtconnect-ng)|(@alejos7ven)|(@onchain-curator)|(@clixmoney)|(@tekraze)|(@saboin)|(@joviansummer)|(@lucylin)|(@phusionphil)|(@olachi)|(@oadissin)|(@soniap)|(@bam-bi)|(@blurt-varieties)|(@blurt-poem)|(@blurtmovies)|(@ifylois)|(@mrnine)|(@charmingking1)|(@warrior02)")
 			reg1 := regexp.MustCompile("https.+")
 			for _, authValue := range value {
 

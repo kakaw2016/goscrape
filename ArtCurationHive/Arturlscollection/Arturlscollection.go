@@ -1,4 +1,4 @@
-package BlurtUrlsCollection
+package Arturlscollection
 
 import (
 	"bufio"
@@ -89,8 +89,9 @@ func scrapesource(url string) map[string][]string {
 	}
 
 	sourcescrape := doc.Find("#content").Text()
+	//fmt.Println("We have something", sourcescrape)
 
-	reg := regexp.MustCompile("^.+Sig.+Join.+A-Ads.+Network")
+	reg := regexp.MustCompile("^.+Sig.+communities…")
 
 	sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
 
@@ -105,6 +106,8 @@ func scrapesource(url string) map[string][]string {
 	}
 
 	formatedata := jsonToMap(groupdata)
+
+	//fmt.Println("We have something", formatedata)
 
 	return formatedata
 
@@ -123,19 +126,18 @@ func (stock *product) collectedata(data map[string][]string) []string {
 
 			value = data["url"]
 
-			reg := regexp.MustCompile("(psa-swap-blurt-activated-on-hive-engine-replacing-blurtlink)|(welcome-to-the-blurtaverse-get-your-avatar-now)|(social-etiquette-and-how-to-succeed-on-blurt)|(blurt-enginedrop-attestation-gamestate-megaverse)|(rh2c81)|(what-s-stopping-me-buying-more-blurt)|(ria9of)|(@blurtconnect-ng)|(@alejos7ven)|(@onchain-curator)|(@clixmoney)|(@tekraze)|(@saboin)|(@joviansummer)|(@lucylin)|(@phusionphil)|(@oadissin)")
-			reg1 := regexp.MustCompile("https.*@.*")
+			reg := regexp.MustCompile("(ipfs+)|(https.+images.ecency.com.+)")
+			//reg1 := regexp.MustCompile("https.+")
 			for _, authValue := range value {
 
 				//if reg.MatchString(authValue) || reg1.MatchString(authValue) {
-				if reg.MatchString(authValue) {
+				//if reg.MatchString(authValue) {
 
-					continue
-				}
-
-				if reg1.MatchString(authValue) && authValue != "" {
+				//	continue
+				//} else if !reg.MatchString(authValue) && authValue != "" {
+				if !reg.MatchString(authValue) && authValue != "" {
 					reg2 := regexp.MustCompile(".+@")
-					v1 := reg2.ReplaceAllString(authValue, "https://blurtlatam.intinte.org/@")
+					v1 := reg2.ReplaceAllString(authValue, "https://hive.blog/@")
 					if v1 != "" {
 
 						stock.Url = v1
@@ -163,10 +165,9 @@ func Initialized() {
 
 	var blockUrls []string
 
-	urlsPages := [3]string{
-		"https://blurtlatam.intinte.org/hot/blurtafrica",
-		"https://blurtlatam.intinte.org/created/blurtafrica",
-		"https://blurtlatam.intinte.org/trending/blurtafrica",
+	urlsPages := []string{
+
+		"https://hive.blog/created/creativecoin",
 	}
 
 	for _, urlPage := range urlsPages {
@@ -178,9 +179,7 @@ func Initialized() {
 
 	blockUrls = noDuplicateArray(blockUrls)
 
-	//blockUrls = noDuplicateArray(blockUrls)
-
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
