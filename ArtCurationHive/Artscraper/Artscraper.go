@@ -588,13 +588,13 @@ Feel free to read more about previous art-reviewed articles on my Hive publicati
 ## Warm regards
 </div>
 
-Weekly Art - Contest + Entries Recap: 90+ CreativeWork // Issue n.4
+Weekly Art - Contest + Entries Recap: 90+ CreativeWork // Issue n.9
 
 art photofeed creativecoin photography arte contests challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
 
 Description
 
-How are you doing Art Fan on Hive? Here are some Challenge for the current week contests. The links gathered from multiple communities on Hive.
+How are you doing Art Fan on Hive? Here are some Challenges for the current week's contests. The links were gathered from multiple communities on Hive.
 `
 
 	w := bufio.NewWriter(fileStoredata)

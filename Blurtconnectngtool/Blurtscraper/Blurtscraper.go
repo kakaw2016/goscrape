@@ -470,6 +470,8 @@ Below are a few posts selected for this scope of publications. The articles in t
  
 <div class="text-center">
 
+https://youtu.be/6o3URCqXZgs
+
 # Follow-Up News
 
 </div>

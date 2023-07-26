@@ -451,6 +451,8 @@ Below we highlight a few posts selected from Blurt Africa Community.
 
 <div class="text-center">
 
+https://youtu.be/6o3URCqXZgs
+
 # Follow-Up News
 
 </div>
