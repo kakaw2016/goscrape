@@ -544,7 +544,7 @@ Feel free to read more about the contest I share on my blog. Please visit the fo
 
 Delegation - Raffles - Giveaways: 20+ Updated Contests // Directory #️⃣ 110
 
-splinterlands spt play2earn indiaunited ocd thgaming play2own oneup neoxian leofinance alive pgm pimp proofofbrain meme waiv contests hiveengine archon cent vyb ctp trliste hhguild
+splinterlands spt play2earn indiaunited ocd thgaming play2own oneup neoxian leofinance alive pgm pimp proofofbrain meme waiv contest hiveengine archon cent vyb ctp trliste hhguild
 
 Description
 

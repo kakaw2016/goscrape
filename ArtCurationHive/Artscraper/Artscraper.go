@@ -278,7 +278,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			valueB := data["created"]
 			var valueC, valueD []string
 
-			dayAgoTime1 := time.Now().AddDate(0, 0, -4).Format("2006-01-02T15:04:05")
+			dayAgoTime1 := time.Now().AddDate(0, 0, -3).Format("2006-01-02T15:04:05")
 
 			dayAgoTime, _ := time.Parse("2006-01-02T15:04:05", dayAgoTime1)
 
@@ -437,7 +437,7 @@ func filterLinksTounique(urls []string) []string {
 				if key == username {
 					experience = data[key]
 
-					uniqueUrls = append(uniqueUrls, fmt.Sprint(experience[0]))
+					uniqueUrls = append(uniqueUrls, fmt.Sprint(experience[len(experience)-1]))
 
 				}
 
@@ -590,7 +590,7 @@ Feel free to read more about previous art-reviewed articles on my Hive publicati
 
 Weekly Art - Contest + Entries Recap: 90+ CreativeWork // Issue n.9
 
-art photofeed creativecoin photography arte contests challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
+art photofeed creativecoin photography arte contest challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
 
 Description
 
