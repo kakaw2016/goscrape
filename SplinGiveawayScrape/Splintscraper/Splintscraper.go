@@ -12,8 +12,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/claudiu/gocron"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -404,15 +402,15 @@ func Initialized() {
 
 	var blurtUrls []string
 
-	blurtUrls1 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintConnectLinkScrape.txt")
+	blurtUrls1 := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintConnectLinkScrape.txt")
 
-	blurtUrls2 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplinterPosts")
+	blurtUrls2 := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplinterPosts")
 
 	blurtUrls = append(blurtUrls, blurtUrls1...)
 	blurtUrls = append(blurtUrls, blurtUrls2...)
 	blurtUrls = noduplicate(blurtUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -431,13 +429,13 @@ func Initialized() {
 
 <div class="text-justify">
 
-How was your adventure since the season reset?
+Beautiful day over the colorful landscape of Pretoria.
 
-My guess is that your progression is as smooth as mine or other Splinter Warriors.
+How is your adventure progression in the universe of Splinterlands?
 
 I hope that your season reward is great and will remain diverse and rich in powerful cards.
 
-I have enjoyed my adventure since players entered this season of Splinterlands. My experience is not as awesome as I would like but it is all about the journey and less about the destination.
+My adventure is exceptional in the Wild format. The progression could be better but it is all about the journey and less about the destination.
 
 Enjoy your campaign and achieve your goals. The season is full of surprises great Warriors on Pretoria Lands.
 
@@ -462,7 +460,7 @@ Splinterlands players have the opportunity to read a brief report on a recent co
 
 <div class="text-justify">
 
-So I thought I should post and maintain here an updated directory of several contests, giveaways, or raffles related to Splinterlands.
+So I thought I could post and maintain here an updated directory of several contests, giveaways, or raffles related to Splinterlands.
 
 The community members are welcome to participate in updating this list. By doing so this project can achieve its community goals.
 
@@ -542,13 +540,14 @@ Feel free to read more about the contest I share on my blog. Please visit the fo
 ## Warm regards
 </div>
 
-Delegation - Raffles - Giveaways: 20+ Updated Contests // Directory #️⃣ 110
+Delegation - Raffles - Giveaways: 40+ Updated Contests // Directory #️⃣ 200
 
-splinterlands spt play2earn indiaunited ocd thgaming play2own oneup neoxian leofinance alive pgm pimp proofofbrain meme waiv contest hiveengine archon cent vyb ctp trliste hhguild
+splinterlands spt play2earn indiaunited ocdb freecompliments thgaming play2own oneup neoxian leo alive pgm pimp proofofbrain meme waiv contest hive-engine archon cent vyb ctp bro hhguild
+
 
 Description
 
-How are you doing Splinterlands warriors? Here are some giveaways and contests links gathered from Splinterlands World of articles.
+Splinterlands warriors peace and prosperity. Here are some giveaways and contest links gathered from Splinterlands articles.
 `
 
 	w := bufio.NewWriter(fileStoredata)
@@ -593,7 +592,7 @@ How are you doing Splinterlands warriors? Here are some giveaways and contests l
 
 }
 
-func Cronjob() {
+/*func Cronjob() {
 
 	ch := gocron.Start()
 
@@ -606,7 +605,7 @@ func Cronjob() {
 
 	<-ch
 
-}
+}*/
 
 /*
 Filtration

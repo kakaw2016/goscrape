@@ -6,8 +6,8 @@ import pprint
 from beem import Hive
 from beem.discussions import Query, Discussions
 stdoutOrigin=sys.stdout 
-#sys.stdout = open("/home/youthbrigthfuture/CodeZone/Hivecuration/ContestPosts", "w")
-sys.stdout = open("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artposts", "a+")
+#sys.stdout = open("/home/kakashinaruto/CodeZone/Hivecuration/ContestPosts", "w")
+sys.stdout = open("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artposts", "a+")
 h = Hive()
 
 title = 'Please choose filter: '
@@ -15,6 +15,7 @@ title = 'Please choose filter: '
 options = []
 option1 = []
 option2 = []
+option22 = []
 option3 = []
 option4 = []
 option5 = []
@@ -30,6 +31,10 @@ post1 = d.get_discussions('created', q, limit=100)
 q2 = Query(limit=100, tag="digitalart")
 d2 = Discussions()
 post2 = d2.get_discussions('created', q2, limit=100)
+
+q22 = Query(limit=100, tag="music")
+d22 = Discussions()
+post22 = d22.get_discussions('created', q22, limit=100)
 
 q3 = Query(limit=100, tag="photography")
 d3 = Discussions()
@@ -63,6 +68,9 @@ for p in post1:
 for p in post2:
     option2.append('https://hive.blog/@'+p["author"]+'/'+p["permlink"])
 
+for p in post22:
+    option22.append('https://hive.blog/@'+p["author"]+'/'+p["permlink"])
+
 for p in post3:
     option3.append('https://hive.blog/@'+p["author"]+'/'+p["permlink"])
 
@@ -82,7 +90,7 @@ for p in post8:
     option8.append('https://hive.blog/@'+p["author"]+'/'+p["permlink"])
 
 
-options = (set(option2) | set(option1) | set(option3) | set(option4)) & (set(option5) | set(option6) | set(option7) | set(option8))
+options = (set(option2) | set(option1) | set(option3) | set(option4) | set(option22)) & (set(option5) | set(option6) | set(option7) | set(option8))
 
 for link in options:
     print(link)

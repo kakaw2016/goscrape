@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@beblurt/dblurt": "^0.10.0"
+  }
+}

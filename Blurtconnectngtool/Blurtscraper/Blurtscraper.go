@@ -12,8 +12,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/claudiu/gocron"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -112,9 +110,10 @@ func scrapesource(url string) map[string][]string {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	/*if resp.StatusCode != 200 {
 		log.Fatalf("failed to fetch data: %d %s %v", resp.StatusCode, resp.Status, resp.Request.URL)
-	}
+
+	}*/
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 
@@ -132,11 +131,11 @@ func scrapesource(url string) map[string][]string {
 
 	var groupdata brutedata
 
-	err2 := json.Unmarshal([]byte(sourcescrape), &groupdata)
+	_ = json.Unmarshal([]byte(sourcescrape), &groupdata)
 
-	if err2 != nil {
-		fmt.Println(err)
-	}
+	/*if err2 != nil {
+		fmt.Println("JSON Unmarshal", err2)
+	}*/
 
 	formatedata := jsonToMap(groupdata)
 
@@ -253,7 +252,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			valueB := data["last_update"]
 			var valueC, valueD []string
 
-			dayAgoTime1 := time.Now().AddDate(0, 0, -2).Format("2006-01-02T15:04:05")
+			dayAgoTime1 := time.Now().AddDate(0, 0, -3).Format("2006-01-02T15:04:05")
 
 			dayAgoTime, _ := time.Parse("2006-01-02T15:04:05", dayAgoTime1)
 
@@ -291,14 +290,17 @@ func (stock *product) collectedata(data map[string][]string) {
 			}
 
 		}
-		if key == "current_route" && len(data["current_route"]) != 0 {
+		if key == "pathname" && len(data["pathname"]) != 0 {
 
-			value = data["current_route"]
-			v1 := strings.ReplaceAll(value[0], "@", "https://blurtlatam.intinte.org/@")
+			value = data["pathname"]
+			//v1 := strings.ReplaceAll(value[0], "/@", "https://blurtlatam.intinte.org/@")
+			regCorrection := regexp.MustCompile("^.+@")
+
+			v1 := regCorrection.ReplaceAllLiteralString(value[0], "https://blurt.blog/@")
 
 			stock.Url = v1
 
-		} else if len(data["current_route"]) == 0 {
+		} else if len(data["pathname"]) == 0 {
 			fmt.Println("There is an error of KEYURL")
 		}
 
@@ -310,7 +312,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			for _, valueA := range value {
 
-				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|alejos7ven|onchain-curator|clixmoney|tekraze|saboin|joviansummer|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
+				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|nalexadre|alejos7ven|onchain-curator|andgon99|symbion|dianaventas|bichotaclan|clixmoney|tekraze|saboin|joviansummer|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
 
 				if !reg2.MatchString(valueA) {
 					reg3 := regexp.MustCompile("https.+" + "((webp)|(jpg)|(jpeg)|(png)|(gif)|(JPG)|(JPEG)|(PNG)|(GIF))")
@@ -399,9 +401,9 @@ func (stock *product) collectedata(data map[string][]string) {
 
 func Initialized() {
 
-	blurtUrls := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtConnectLinkScrape.txt")
+	blurtUrls := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtConnectLinkScrape.txt")
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -409,12 +411,25 @@ func Initialized() {
 
 	fmt.Println("Total URL", len(blurtUrls))
 
+	/*for _, blurtPost := range blurtUrls[1:3] {
+		fmt.Println(blurtPost)
+		z := scrapesource(blurtPost)
+		for k1, z1 := range z {
+			fmt.Println(k1, "======>", z1)
+
+		}
+
+	}*/
+
 	const headtext string = `
 <div class="text-justify">
 
 Peace,
 
-I hope you are doing great this week.
+Greetings,
+
+I hope you are doing great my friends.
+
 The curation effort is still on for the pleasure of all Blurtians in the community.
 
 Blurtconnect-ng teams have done successful collaborative works to provide attention to amazing Blurters articles published on a daily basis in the community.
@@ -470,7 +485,6 @@ Below are a few posts selected for this scope of publications. The articles in t
  
 <div class="text-center">
 
-https://youtu.be/6o3URCqXZgs
 
 # Follow-Up News
 
@@ -484,7 +498,7 @@ https://youtu.be/6o3URCqXZgs
 
 <div class="text-center">
 
-https://youtu.be/73eeFdryiPs
+https://youtu.be/BYEdW7l3kxQ
 </div>
 
 
@@ -535,7 +549,7 @@ BLURTCONNECT-NG LARGE SCOPE CONTENTS REPORT N# // 2% to Null
 
 Blurtconnect Witness and Curators welcome you all to this brief recapitulation of posts in the community
 
-blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife curation blurtindia blurthispano
+blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpak newvisionlife curation blurtindia blurthispano
 `
 
 	w := bufio.NewWriter(fileStoredata)
@@ -565,16 +579,6 @@ blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife 
 	_, _ = w.WriteString(dataToStore3)
 	w.Flush()
 
-	/*for _, blurtPost := range blurtUrls {
-		fmt.Println(blurtPost)
-		z := scrapesource(blurtPost)
-		for k1, z1 := range z {
-			fmt.Println(k1, "======>", z1)
-
-		}
-
-	}*/
-
 }
 
 /*func test(stop chan bool) {
@@ -582,7 +586,7 @@ blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife 
 	gocron.Clear()
 	fmt.Println("All task removed")
 	close(stop)
-}*/
+}
 
 func Cronjob() {
 
@@ -597,7 +601,7 @@ func Cronjob() {
 
 	<-ch
 
-}
+}*/
 
 /*func main() {
 	initialized()

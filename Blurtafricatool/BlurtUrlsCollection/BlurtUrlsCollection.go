@@ -10,7 +10,6 @@ import (
 	"regexp"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/claudiu/gocron"
 )
 
 func noDuplicateArray(contents []string) []string {
@@ -78,9 +77,9 @@ func scrapesource(url string) map[string][]string {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	/*if resp.StatusCode != 200 {
 		log.Fatalf("failed to fetch data: %d %s", resp.StatusCode, resp.Status)
-	}
+	}*/
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 
@@ -90,7 +89,9 @@ func scrapesource(url string) map[string][]string {
 
 	sourcescrape := doc.Find("#content").Text()
 
-	reg := regexp.MustCompile("^.+Sig.+Join.+A-Ads.+Network")
+	//fmt.Print(sourcescrape)
+
+	reg := regexp.MustCompile("^.+Sig.+Join.+A-Ads.+\n")
 
 	sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
 
@@ -101,10 +102,12 @@ func scrapesource(url string) map[string][]string {
 	err2 := json.Unmarshal([]byte(sourcescrape), &groupdata)
 
 	if err2 != nil {
-		fmt.Println(err)
+		fmt.Println(err2)
 	}
 
 	formatedata := jsonToMap(groupdata)
+
+	//fmt.Println("We have something", formatedata)
 
 	return formatedata
 
@@ -123,19 +126,21 @@ func (stock *product) collectedata(data map[string][]string) []string {
 
 			value = data["url"]
 
-			reg := regexp.MustCompile("(psa-swap-blurt-activated-on-hive-engine-replacing-blurtlink)|(welcome-to-the-blurtaverse-get-your-avatar-now)|(social-etiquette-and-how-to-succeed-on-blurt)|(blurt-enginedrop-attestation-gamestate-megaverse)|(rh2c81)|(what-s-stopping-me-buying-more-blurt)|(ria9of)|(@blurtconnect-ng)|(@alejos7ven)|(@onchain-curator)|(@clixmoney)|(@tekraze)|(@saboin)|(@joviansummer)|(@lucylin)|(@phusionphil)|(@oadissin)")
-			reg1 := regexp.MustCompile("https.*@.*")
+			reg := regexp.MustCompile("(psa-swap-blurt-activated-on-hive-engine-replacing-blurtlink)|(welcome-to-the-blurtaverse-get-your-avatar-now)|(social-etiquette-and-how-to-succeed-on-blurt)|(blurt-enginedrop-attestation-gamestate-megaverse)|(rh2c81)|(blurtofficial)|(andgon99)|(what-s-stopping-me-buying-more-blurt)|(ria9of)|(@acomunity)|(@blurtconnect-ng)|(@alejos7ven)|(@onchain-curator)|(@clixmoney)|(@tekraze)|(@saboin)|(@joviansummer)|(@lucylin)|(@phusionphil)|(@oadissin)")
+			//reg1 := regexp.MustCompile("https.*@.*")
+			reg1 := regexp.MustCompile("https.*@")
+			reg2 := regexp.MustCompile(".+@")
 			for _, authValue := range value {
 
-				//if reg.MatchString(authValue) || reg1.MatchString(authValue) {
-				if reg.MatchString(authValue) {
+				if reg.MatchString(authValue) || reg1.MatchString(authValue) {
 
 					continue
 				}
 
-				if reg1.MatchString(authValue) && authValue != "" {
-					reg2 := regexp.MustCompile(".+@")
-					v1 := reg2.ReplaceAllString(authValue, "https://blurtlatam.intinte.org/@")
+				//if reg1.MatchString(authValue) && authValue != "" {
+				if reg2.FindString(authValue) != "" {
+
+					v1 := reg2.ReplaceAllString(authValue, "https://blurt.blog/@")
 					if v1 != "" {
 
 						stock.Url = v1
@@ -148,7 +153,7 @@ func (stock *product) collectedata(data map[string][]string) []string {
 			}
 
 		} else if len(data["url"]) == 0 {
-			fmt.Println("There is an error of KEYURL")
+			fmt.Println("There is an error of Grab KEYURL")
 		}
 
 	}
@@ -163,14 +168,19 @@ func Initialized() {
 
 	var blockUrls []string
 
-	urlsPages := [3]string{
-		"https://blurtlatam.intinte.org/hot/blurtafrica",
-		"https://blurtlatam.intinte.org/created/blurtafrica",
-		"https://blurtlatam.intinte.org/trending/blurtafrica",
+	urlsPages := []string{
+		"https://blurt.blog/hot/blurtafrica",
+		"https://blurt.blog/trending/blurtafrica",
+		"https://blurt.blog/created/blurtafrica",
 	}
+
+	/*urlsPages := []string{
+		"https://blurt.blog/hot/blurtafrica",
+	}*/
 
 	for _, urlPage := range urlsPages {
 		postCodeSource := scrapesource(urlPage)
+
 		blockUrls = collInfo.collectedata(postCodeSource)
 		blockUrls = append(blockUrls, blockUrls...)
 
@@ -180,7 +190,7 @@ func Initialized() {
 
 	//blockUrls = noDuplicateArray(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -190,9 +200,9 @@ func Initialized() {
 
 	var dataToStore2 string
 
-	for _, blurtPost := range blockUrls {
+	for _, blurtAfricaPost := range blockUrls {
 
-		dataToStore2 = fmt.Sprintln("\n" + blurtPost)
+		dataToStore2 = fmt.Sprintln("\n" + blurtAfricaPost)
 
 		_, _ = w.WriteString(dataToStore2)
 
@@ -202,7 +212,7 @@ func Initialized() {
 
 }
 
-func CronSchedule() {
+/*func CronSchedule() {
 	ch := gocron.Start()
 
 	gocron.Every(20).Minutes().Do(Initialized)
@@ -214,4 +224,4 @@ func CronSchedule() {
 
 	<-ch
 
-}
+}*/

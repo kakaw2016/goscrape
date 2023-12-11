@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"regexp"
@@ -73,24 +72,26 @@ func scrapesource(url string) map[string][]string {
 	resp, err := http.Get(url)
 
 	if err != nil {
-		log.Fatal(err)
+		//log.Fatal(err)
+		fmt.Println("Http GET", err)
 	}
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	/*if resp.StatusCode != 200 {
 		log.Fatalf("failed to fetch data: %d %s", resp.StatusCode, resp.Status)
-	}
+	}*/
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 
 	if err != nil {
-		log.Fatal(err)
+		//log.Fatal(err)
+		fmt.Println("Goquery", err)
 	}
 
 	sourcescrape := doc.Find("#content").Text()
 
-	reg := regexp.MustCompile("^.+Sig.+Join.+A-Ads.+Network")
+	reg := regexp.MustCompile("^.+Sig.+Join.+A-Ads.+\n")
 
 	sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
 
@@ -101,7 +102,7 @@ func scrapesource(url string) map[string][]string {
 	err2 := json.Unmarshal([]byte(sourcescrape), &groupdata)
 
 	if err2 != nil {
-		fmt.Println(err)
+		fmt.Println("JSON Unmarshal", err2)
 	}
 
 	formatedata := jsonToMap(groupdata)
@@ -132,7 +133,7 @@ func (stock *product) collectedata(data map[string][]string) []string {
 					continue
 				} else if !reg.MatchString(authValue) && authValue != "" {
 					reg2 := regexp.MustCompile(".+@")
-					v1 := reg2.ReplaceAllString(authValue, "https://blurtlatam.intinte.org/@")
+					v1 := reg2.ReplaceAllString(authValue, "https://blurt.blog/@")
 					if v1 != "" {
 
 						stock.Url = v1
@@ -177,9 +178,10 @@ func Initialized() {
 
 	//blockUrls = noDuplicateArray(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtconnectngtool/BlurtConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-		log.Fatal(err)
+		//log.Fatal(err)
+		fmt.Println("Os Open Filestoredata", err)
 	}
 	defer fileStoredata.Close()
 

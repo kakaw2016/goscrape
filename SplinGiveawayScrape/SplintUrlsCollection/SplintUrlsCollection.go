@@ -10,7 +10,6 @@ import (
 	"regexp"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/claudiu/gocron"
 )
 
 func noDuplicateArray(contents []string) []string {
@@ -91,7 +90,7 @@ func scrapesource(url string) map[string][]string {
 	sourcescrape := doc.Find("#content").Text()
 	//fmt.Println("We have something", sourcescrape)
 
-	reg := regexp.MustCompile("^.+Sig.+communities…")
+	reg := regexp.MustCompile("^.+Sig.+\n\n.+\n")
 
 	sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
 
@@ -179,7 +178,7 @@ func Initialized() {
 
 	blockUrls = noDuplicateArray(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplintConnectLinkScrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -189,9 +188,9 @@ func Initialized() {
 
 	var dataToStore2 string
 
-	for _, blurtPost := range blockUrls {
+	for _, splinterArticle := range blockUrls {
 
-		dataToStore2 = fmt.Sprintln("\n" + blurtPost)
+		dataToStore2 = fmt.Sprintln("\n" + splinterArticle)
 
 		_, _ = w.WriteString(dataToStore2)
 
@@ -201,7 +200,7 @@ func Initialized() {
 
 }
 
-func CronSchedule() {
+/*func CronSchedule() {
 	ch := gocron.Start()
 
 	gocron.Every(20).Minutes().Do(Initialized)
@@ -213,4 +212,4 @@ func CronSchedule() {
 
 	<-ch
 
-}
+}*/

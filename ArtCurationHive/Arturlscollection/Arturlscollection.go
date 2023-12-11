@@ -179,7 +179,7 @@ func Initialized() {
 
 	blockUrls = noDuplicateArray(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -189,9 +189,9 @@ func Initialized() {
 
 	var dataToStore2 string
 
-	for _, blurtPost := range blockUrls {
+	for _, artPosts := range blockUrls {
 
-		dataToStore2 = fmt.Sprintln("\n" + blurtPost)
+		dataToStore2 = fmt.Sprintln("\n" + artPosts)
 
 		_, _ = w.WriteString(dataToStore2)
 

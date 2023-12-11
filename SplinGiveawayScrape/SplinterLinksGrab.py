@@ -6,8 +6,8 @@ import pprint
 from beem import Hive
 from beem.discussions import Query, Discussions
 stdoutOrigin=sys.stdout 
-#sys.stdout = open("/home/youthbrigthfuture/CodeZone/Hivecuration/ContestPosts", "w")
-sys.stdout = open("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplinterPosts", "a+")
+#sys.stdout = open("/home/kakashinaruto/CodeZone/Hivecuration/ContestPosts", "w")
+sys.stdout = open("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/SplinGiveawayScrape/SplinterPosts", "a+")
 h = Hive()
 
 title = 'Please choose filter: '

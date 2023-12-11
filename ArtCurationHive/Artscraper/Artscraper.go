@@ -457,9 +457,9 @@ func Initialized() {
 
 	var blockUrls []string
 
-	blockUrls1 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt")
+	blockUrls1 := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artconnectlinkscrape.txt")
 
-	blockUrls2 := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artposts")
+	blockUrls2 := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artposts")
 
 	blockUrls = append(blockUrls, blockUrls1...)
 	blockUrls = append(blockUrls, blockUrls2...)
@@ -467,7 +467,7 @@ func Initialized() {
 
 	blockUrls = filterLinksTounique(blockUrls)
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artlivescrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/ArtCurationHive/Artlivescrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -588,7 +588,7 @@ Feel free to read more about previous art-reviewed articles on my Hive publicati
 ## Warm regards
 </div>
 
-Weekly Art - Contest + Entries Recap: 90+ CreativeWork // Issue n.9
+Weekly Art - Contest + Entries Recap: 30+ CreativeWork // Issue n.50
 
 art photofeed creativecoin photography arte contest challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
 
@@ -606,9 +606,9 @@ How are you doing Art Fan on Hive? Here are some Challenges for the current week
 
 	var collinfo product
 
-	for _, blurtPost := range blockUrls {
+	for _, artPosts := range blockUrls {
 
-		postCodeSource := scrapesource(blurtPost)
+		postCodeSource := scrapesource(artPosts)
 		collinfo.collectedata(postCodeSource)
 
 		if collinfo.Title != "" && collinfo.Images != "" && collinfo.Url != "" && collinfo.Voters != "" && collinfo.Authors != "" && len(collinfo.PostAge) != 0 {
@@ -625,9 +625,9 @@ How are you doing Art Fan on Hive? Here are some Challenges for the current week
 	_, _ = w.WriteString(dataToStore3)
 	w.Flush()
 
-	/*for _, blurtPost := range blockUrls[:1] {
-		fmt.Println(blurtPost)
-		z := scrapesource(blurtPost)
+	/*for _, artPosts := range blockUrls[:1] {
+		fmt.Println(artPosts)
+		z := scrapesource(artPosts)
 		for k1, z1 := range z {
 			fmt.Println(k1, "======>", z1)
 

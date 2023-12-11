@@ -12,8 +12,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/claudiu/gocron"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -112,9 +110,9 @@ func scrapesource(url string) map[string][]string {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	/*if resp.StatusCode != 200 {
 		log.Fatalf("failed to fetch data: %d %s %v", resp.StatusCode, resp.Status, resp.Request.URL)
-	}
+	}*/
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 
@@ -132,11 +130,11 @@ func scrapesource(url string) map[string][]string {
 
 	var groupdata brutedata
 
-	err2 := json.Unmarshal([]byte(sourcescrape), &groupdata)
+	_ = json.Unmarshal([]byte(sourcescrape), &groupdata)
 
-	if err2 != nil {
-		fmt.Println(err)
-	}
+	/*if err2 != nil {
+		fmt.Println(err2)
+	}*/
 
 	formatedata := jsonToMap(groupdata)
 
@@ -204,7 +202,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			value = data["name"]
 
-			reg1 := regexp.MustCompile("(blurtofficial)|(andgon99)|(blurtconnect-ng)|(alejos7ven)|(onchain-curator)|(clixmoney)|(tekraze)|(saboin)|(joviansummer)|(lucylin)|(phusionphil)")
+			reg1 := regexp.MustCompile("(blurtofficial)|(andgon99)|(blurtconnect-ng)|(acomunity)|(blurttribe)|(alejos7ven)|(onchain-curator)|(clixmoney)|(tekraze)|(saboin)|(joviansummer)|(lucylin)|(phusionphil)")
 			for _, authValue := range value {
 				if !reg1.MatchString(authValue) && authValue != "post" {
 					//if authValue != "post" {
@@ -291,15 +289,19 @@ func (stock *product) collectedata(data map[string][]string) {
 			}
 
 		}
-		if key == "current_route" && len(data["current_route"]) != 0 {
+		if key == "pathname" && len(data["pathname"]) != 0 {
 
-			value = data["current_route"]
-			v1 := strings.ReplaceAll(value[0], "@", "https://blurtlatam.intinte.org/@")
+			value = data["pathname"]
+			//v1 := strings.ReplaceAll(value[0], "@", "https://blurtlatam.intinte.org/@")
+
+			regCorrection := regexp.MustCompile("^.+@")
+
+			v1 := regCorrection.ReplaceAllLiteralString(value[0], "https://blurt.blog/@")
 
 			stock.Url = v1
 
-		} else if len(data["current_route"]) == 0 {
-			fmt.Println("There is an error of KEYURL")
+		} else if len(data["pathname"]) == 0 {
+			fmt.Println("Body element error of KEYURL")
 		}
 
 		if key == "body" && len(data["body"]) != 0 {
@@ -310,7 +312,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			for _, valueA := range value {
 
-				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|alejos7ven|onchain-curator|clixmoney|tekraze|saboin|joviansummer|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
+				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|nalexadre|symbiont|alejos7ven|onchain-curator|clixmoney|tekraze|saboin|joviansummer|andgon99|dianaventas|bichotaclan|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
 
 				if !reg2.MatchString(valueA) {
 					reg3 := regexp.MustCompile("https.+" + "((webp)|(jpg)|(jpeg)|(png)|(gif)|(JPG)|(JPEG)|(PNG)|(GIF))")
@@ -399,22 +401,24 @@ func (stock *product) collectedata(data map[string][]string) {
 
 func Initialized() {
 
-	blurtUrls := readfile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtConnectLinkScrape.txt")
+	blurtAfricaUrls := readfile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtConnectLinkScrape.txt")
 
-	fileStoredata, err := os.OpenFile("/home/youthbrigthfuture/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
+	fileStoredata, err := os.OpenFile("/home/kakashinaruto/go/src/github.com/kakaw2016/goscrape/Blurtafricatool/BlurtLiveScrape.txt", os.O_CREATE|os.O_RDWR|os.O_SYNC, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fileStoredata.Close()
 
-	fmt.Println("Total URL", len(blurtUrls))
+	fmt.Println("Total URL", len(blurtAfricaUrls))
 
 	const headtext string = `
 <div class="text-justify">
 
 Peace,
 
-How are you doing Blurtians?
+What a beautiful day dear Blurtians?
+
+I hope you had an eventful and productive hours of work.
 
 The curation effort is still on for the pleasure of all Blurtians in the community.
 
@@ -451,7 +455,7 @@ Below we highlight a few posts selected from Blurt Africa Community.
 
 <div class="text-center">
 
-https://youtu.be/6o3URCqXZgs
+https://youtu.be/nb4VTqL2UOg
 
 # Follow-Up News
 
@@ -479,11 +483,11 @@ Please kindly click on this link above to Vote Our Witness.
 
 </div>
 
-BLURTAFRICA LARGE SCOPE CONTENTS REVIEW REPORT N# // 2% to Null
+BLURTAFRICA LARGE SCOPE CONTENTS REVIEW REPORT N# // 1% to Null
 
 Blurtconnect Witness and African Curators welcome you all to this brief review of this week posts in the community
 
-blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife curation blurtindia blurthispano
+blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpak newvisionlife curation blurtindia blurthispano
 `
 
 	w := bufio.NewWriter(fileStoredata)
@@ -495,9 +499,9 @@ blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife 
 
 	var collinfo product
 
-	for _, blurtPost := range noduplicate(blurtUrls) {
+	for _, blurtAfricaPost := range noduplicate(blurtAfricaUrls) {
 
-		postCodeSource := scrapesource(blurtPost)
+		postCodeSource := scrapesource(blurtAfricaPost)
 		collinfo.collectedata(postCodeSource)
 
 		if collinfo.Title != "" && collinfo.Images != "" && collinfo.Url != "" && collinfo.Voters != "" && collinfo.Authors != "" && len(collinfo.PostAge) != 0 {
@@ -514,15 +518,15 @@ blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpower newvisionlife 
 
 }
 
-func Cronjob() {
+/*func Cronjob() {
 
 	ch := gocron.Start()
 
-	gocron.Every(30).Minutes().Do(Initialized)
+	gocron.Every(1).Days().Do(Initialized)
 
 	_, time := gocron.NextRun()
 	fmt.Println("Next Schedule In: ", time)
 
 	<-ch
 
-}
+}*/
