@@ -540,9 +540,10 @@ Feel free to read more about the contest I share on my blog. Please visit the fo
 ## Warm regards
 </div>
 
-Delegation - Raffles - Giveaways: 40+ Updated Contests // Directory #️⃣ 200
+Game Updated Contests/Delegation - Raffles - Giveaways/ 45+ // Directory #️⃣ 240
 
-splinterlands spt play2earn indiaunited ocdb freecompliments thgaming play2own oneup neoxian leo alive pgm pimp proofofbrain meme waiv contest hive-engine archon cent vyb ctp bro hhguild
+
+splinterlands spt play2earn indiaunited ocdb freecompliments thgaming play2own freecompliments oneup neoxian leo alive pgm pimp proofofbrain meme waiv contest hive-engine archon cent vyb ctp bro hhguild
 
 
 Description

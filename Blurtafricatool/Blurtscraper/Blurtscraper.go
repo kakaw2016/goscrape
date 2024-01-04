@@ -418,11 +418,13 @@ Peace,
 
 What a beautiful day dear Blurtians?
 
-I hope you had an eventful and productive hours of work.
+I hope you had an eventful and productive hours of creation in your city.
 
-The curation effort is still on for the pleasure of all Blurtians in the community.
+The review of articles shared in blurtafrica is the opportunity to highlight the magnificent talents of author in the community.
 
-Blurtconnect and Blurtafrica teams are inviting authors to share their publications without plagiarism.
+As a blurtian native of the West Africa I took on the task to regroup and show in this page the recent publication you may wan to review later in the week without to much scrolling.
+
+Community moderators and interested parties invite authors to share their publications without plagiarism.
 
 It is important that we cite and properly reference our written words before posting on Blurt.
 
@@ -455,7 +457,7 @@ Below we highlight a few posts selected from Blurt Africa Community.
 
 <div class="text-center">
 
-https://youtu.be/nb4VTqL2UOg
+https://www.youtube.com/watch?v=1jNSeiu2vr4
 
 # Follow-Up News
 
@@ -463,11 +465,9 @@ https://youtu.be/nb4VTqL2UOg
 
 <div class="text-justify">
 
-Blurtconnect-ng Team Is Running A Witness Node On BLURT.
+I am happy to support [Blurtconnect-ng Team Witness Project](https://blurtwallet.com/~witnesses?highlight=blurtconnect-ng)
 
-* https://blurtwallet.com/~witnesses?highlight=blurtconnect-ng
-
-Please kindly click on this link above to Vote Our Witness.
+Please kindly click on this link above to Vote for Blurtconnect-ng Witness.
 
 
 <div class="text-center">
@@ -483,11 +483,11 @@ Please kindly click on this link above to Vote Our Witness.
 
 </div>
 
-BLURTAFRICA LARGE SCOPE CONTENTS REVIEW REPORT N# // 1% to Null
+BLURTAFRICA LARGE SCOPE CONTENTS REVIEW REPORT N# // 2% to Null
 
-Blurtconnect Witness and African Curators welcome you all to this brief review of this week posts in the community
+African Blurter and Creators welcome you all to this brief review of this week article on BlurtAfrica.
 
-blurtfirst blurtafrica instablurt r2cornell blurtlatam blurtpak newvisionlife curation blurtindia blurthispano
+blurtfirst blurtafrica instablurt powerclub r2cornell blurtlatam blurtpak review blurtindia blurthispano
 `
 
 	w := bufio.NewWriter(fileStoredata)
