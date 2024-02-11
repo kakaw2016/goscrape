@@ -558,7 +558,7 @@ Enjoy...
 <div class="text-justify"> 
 
 
-The entries here in our review list can motivate you all the engage with the authors and even join the event by checking the community hosting the event. 
+The entries in the review list can motivate you  to engage with authors and even join the contest by checking the community hosting the event. 
 
 Please check your favorite contest main page to place your entry before the deadline.
 </div>
@@ -588,9 +588,9 @@ Feel free to read more about previous art-reviewed articles on my Hive publicati
 ## Warm regards
 </div>
 
-Weekly Art - Contest + Entries Recap: 30+ CreativeWork // Issue n.50
+Weekly Art - Contest + Entries Recap: 30+ CreativeWork // Issue n.95
 
-art photofeed creativecoin photography arte contest challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp trliste palnet
+art photofeed creativecoin photography arte contest challenge streetart graffiti digitalart paintings illustration aliens cervantes neoxian ocd waivio alive proofofbrain meme waiv tribes archon vyb ctp freecompliments palnet
 
 Description
 

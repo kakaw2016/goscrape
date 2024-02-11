@@ -105,7 +105,8 @@ func scrapesource(url string) map[string][]string {
 	resp, err := http.Get(url)
 
 	if err != nil {
-		log.Fatal("GET URLS", err)
+		fmt.Println("GET URLS", err)
+
 	}
 
 	defer resp.Body.Close()
@@ -221,7 +222,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			fmt.Println("There is an error of KEYAUTHORS")
 		}
 
-		if key == "root_title" && len(data["root_title"]) != 0 {
+		/*if key == "root_title" && len(data["root_title"]) != 0 {
 
 			if _, ok := data["root_title"]; ok {
 				value = data["root_title"]
@@ -243,15 +244,33 @@ func (stock *product) collectedata(data map[string][]string) {
 				fmt.Println("There is an error of KEYTITLE")
 			}
 
+		}*/
+
+		if key == "pathname" && len(data["pathname"]) != 0 {
+
+			value = data["pathname"]
+
+			regCorrection := regexp.MustCompile("^.+/")
+
+			v1 := regCorrection.ReplaceAllLiteralString(value[0], "")
+
+			regCorrection = regexp.MustCompile("-")
+
+			v2 := regCorrection.ReplaceAllLiteralString(v1, " ")
+
+			stock.Title = strings.ToUpper(v2)
+
+		} else if len(data["pathname"]) == 0 {
+			fmt.Println("There is an error of TITLE")
 		}
 
-		if (key == "last_root_post" || key == "last_update") && (len(data["last_root_post"]) != 0 || len(data["last_update"]) != 0) {
+		if (key == "time" || key == "last_update") && (len(data["time"]) != 0 || len(data["last_update"]) != 0) {
 
-			valueA := data["last_root_post"]
+			valueA := data["time"]
 			valueB := data["last_update"]
 			var valueC, valueD []string
 
-			dayAgoTime1 := time.Now().AddDate(0, 0, -5).Format("2006-01-02T15:04:05")
+			dayAgoTime1 := time.Now().AddDate(0, 0, -2).Format("2006-01-02T15:04:05")
 
 			dayAgoTime, _ := time.Parse("2006-01-02T15:04:05", dayAgoTime1)
 
@@ -312,7 +331,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			for _, valueA := range value {
 
-				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|nalexadre|symbiont|alejos7ven|onchain-curator|clixmoney|tekraze|saboin|joviansummer|andgon99|dianaventas|bichotaclan|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
+				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|stormike/162aa91c5cb0e5ef78f0ad07e388f0d2fe53d87|blurtlatam.+d9667a3dcb3a4323|nalexadre|symbiont|alejos7ven|onchain-curator|clixmoney|tekraze|saboin|joviansummer|andgon99|dianaventas|bichotaclan|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
 
 				if !reg2.MatchString(valueA) {
 					reg3 := regexp.MustCompile("https.+" + "((webp)|(jpg)|(jpeg)|(png)|(gif)|(JPG)|(JPEG)|(PNG)|(GIF))")

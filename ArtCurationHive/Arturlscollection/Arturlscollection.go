@@ -138,6 +138,7 @@ func (stock *product) collectedata(data map[string][]string) []string {
 				if !reg.MatchString(authValue) && authValue != "" {
 					reg2 := regexp.MustCompile(".+@")
 					v1 := reg2.ReplaceAllString(authValue, "https://hive.blog/@")
+					//v1 := reg2.ReplaceAllString(authValue, "https://peakd.com/@")
 					if v1 != "" {
 
 						stock.Url = v1

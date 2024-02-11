@@ -123,6 +123,8 @@ func scrapesource(url string) map[string][]string {
 
 	sourcescrape := doc.Find("#content").Text()
 
+	//sourcescrape := doc.Find("data").Text()
+
 	//fmt.Println("We have something DOCFIND", sourcescrape)
 
 	reg := regexp.MustCompile("..communit.+result......")
@@ -429,11 +431,11 @@ func Initialized() {
 
 <div class="text-justify">
 
-Beautiful day over the colorful landscape of Pretoria.
+How are you doing on this beautiful day over the colorful landscape of Pretoria.
 
-How is your adventure progression in the universe of Splinterlands?
+You are moving faster in your adventure in the universe of Splinterlands. aren't you?
 
-I hope that your season reward is great and will remain diverse and rich in powerful cards.
+I hope that your daily and season reward are offering unique assets, it will remain diverse and rich in powerful cards.
 
 My adventure is exceptional in the Wild format. The progression could be better but it is all about the journey and less about the destination.
 
@@ -460,7 +462,7 @@ Splinterlands players have the opportunity to read a brief report on a recent co
 
 <div class="text-justify">
 
-So I thought I could post and maintain here an updated directory of several contests, giveaways, or raffles related to Splinterlands.
+My contribution in this project consist of collection and maintenance of this directory of several contests, giveaways, or raffles related to Splinterlands.
 
 The community members are welcome to participate in updating this list. By doing so this project can achieve its community goals.
 
@@ -540,15 +542,13 @@ Feel free to read more about the contest I share on my blog. Please visit the fo
 ## Warm regards
 </div>
 
-Game Updated Contests/Delegation - Raffles - Giveaways/ 45+ // Directory #️⃣ 240
+Game Updated Contests/Delegation - Raffles - Giveaways/ 45+ // Directory #️⃣ 245
 
-
-splinterlands spt play2earn indiaunited ocdb freecompliments thgaming play2own freecompliments oneup neoxian leo alive pgm pimp proofofbrain meme waiv contest hive-engine archon cent vyb ctp bro hhguild
-
+hive-engine cartel splinterlands spt oneup pizza leofinance neoxian neoxag pal ctp vyb battle archon blog pob opg pgm play2earn sps gaming cent hivepromotion gem sportstalk thgaming 3speak blog2earn creativecoin community hivegaming palnet hivepizza
 
 Description
 
-Splinterlands warriors peace and prosperity. Here are some giveaways and contest links gathered from Splinterlands articles.
+Fighters of Pretoria it is an honor to welcome you to this amazing opportunities on giveaways and contests carefully gathered to assist in Your gaming adventure.
 `
 
 	w := bufio.NewWriter(fileStoredata)

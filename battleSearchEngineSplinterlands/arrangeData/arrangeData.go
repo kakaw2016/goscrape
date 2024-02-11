@@ -68,6 +68,10 @@ func (stock *product) categorizeData(data CollectApiData.SplinterlandApiBattle) 
 
 		}
 
+	}
+
+	for _, value := range data.Battles {
+
 		if value.Winner == data.Player && !value.IsSurrender && (value.Player2RatingInitial < value.Player2RatingFinal) {
 
 			stock.BattleLink = "https://splinterlands.com/?p=battle&id=" + value.BattleQueueID1
@@ -128,25 +132,27 @@ func CodeLauncher() {
 
 	collectedUrls := CollectApiData.Readfile(configPath)
 
+	var finalProductA []product
+
 	for _, playerData := range collectedUrls {
 
 		battleApi := CollectApiData.Scrapesource(playerData)
 
 		//fmt.Println("we have battleapi", battleApi)
 
-		finalProductA := battleDetailed.categorizeData(battleApi)
+		finalProductA = battleDetailed.categorizeData(battleApi)
 
 		//fmt.Println("we have FinalProductA", finalProductA)
 
-		for _, finalProductB := range finalProductA {
+	}
 
-			fileData := fmt.Sprintf("\n%v\n-----------\n", finalProductB)
+	for _, finalProductB := range finalProductA {
 
-			_, _ = w.WriteString(fileData)
+		fileData := fmt.Sprintf("\n%v\n-----------\n", finalProductB)
 
-			w.Flush()
+		_, _ = w.WriteString(fileData)
 
-		}
+		w.Flush()
 
 	}
 

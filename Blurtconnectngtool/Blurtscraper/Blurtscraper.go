@@ -105,7 +105,7 @@ func scrapesource(url string) map[string][]string {
 	resp, err := http.Get(url)
 
 	if err != nil {
-		log.Fatal("GET URLS", err)
+		fmt.Println("GET URLS", err)
 	}
 
 	defer resp.Body.Close()
@@ -222,7 +222,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			fmt.Println("There is an error of KEYAUTHORS")
 		}
 
-		if key == "root_title" && len(data["root_title"]) != 0 {
+		/*if key == "root_title" && len(data["root_title"]) != 0 {
 
 			if _, ok := data["root_title"]; ok {
 				value = data["root_title"]
@@ -244,12 +244,30 @@ func (stock *product) collectedata(data map[string][]string) {
 				fmt.Println("There is an error of KEYTITLE")
 			}
 
+		}*/
+
+		if key == "pathname" && len(data["pathname"]) != 0 {
+
+			value = data["pathname"]
+
+			regCorrection := regexp.MustCompile("^.+/")
+
+			v1 := regCorrection.ReplaceAllLiteralString(value[0], "")
+
+			regCorrection = regexp.MustCompile("-")
+
+			v2 := regCorrection.ReplaceAllLiteralString(v1, " ")
+
+			stock.Title = strings.ToUpper(v2)
+
+		} else if len(data["pathname"]) == 0 {
+			fmt.Println("There is an error of TITLE")
 		}
 
-		if (key == "last_root_post" || key == "last_update") && (len(data["last_root_post"]) != 0 || len(data["last_update"]) != 0) {
+		if (key == "time" || key == "last_update") && (len(data["time"]) != 0 || len(data["last_update"]) != 0) {
 
-			valueA := data["last_root_post"]
-			valueB := data["last_update"]
+			valueA := data["last_update"]
+			valueB := data["time"]
 			var valueC, valueD []string
 
 			dayAgoTime1 := time.Now().AddDate(0, 0, -3).Format("2006-01-02T15:04:05")
@@ -285,7 +303,7 @@ func (stock *product) collectedata(data map[string][]string) {
 			}
 			//fmt.Println("testing element", stock.PostAge)
 
-			if len(data["updated"]) == 0 && len(data["created"]) == 0 {
+			if len(data["last_update"]) == 0 && len(data["time"]) == 0 {
 				fmt.Println("There is an error of KEYAGE")
 			}
 
@@ -312,7 +330,7 @@ func (stock *product) collectedata(data map[string][]string) {
 
 			for _, valueA := range value {
 
-				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|blurtlatam.+d9667a3dcb3a4323|nalexadre|alejos7ven|onchain-curator|andgon99|symbion|dianaventas|bichotaclan|clixmoney|tekraze|saboin|joviansummer|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
+				reg2 := regexp.MustCompile("https.+(i.imgur|51f67e7fe072b0ad0fb02f079493b62ad3965f04|fb1a8a788360e7f39bd770b6ecfbe60f1364285b|pastormike/162aa91c5cb0e5ef78f0ad07e388f0d2fe53d87|blurtlatam.+d9667a3dcb3a4323|nalexadre|alejos7ven|onchain-curator|andgon99|symbion|dianaventas|bichotaclan|clixmoney|tekraze|saboin|joviansummer|lucylin|phusionphil).+(webp|jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)")
 
 				if !reg2.MatchString(valueA) {
 					reg3 := regexp.MustCompile("https.+" + "((webp)|(jpg)|(jpeg)|(png)|(gif)|(JPG)|(JPEG)|(PNG)|(GIF))")
@@ -409,9 +427,9 @@ func Initialized() {
 	}
 	defer fileStoredata.Close()
 
-	fmt.Println("Total URL", len(blurtUrls))
+	/*fmt.Println("Total URL", len(blurtUrls))
 
-	/*for _, blurtPost := range blurtUrls[1:3] {
+	for _, blurtPost := range blurtUrls[1:3] {
 		fmt.Println(blurtPost)
 		z := scrapesource(blurtPost)
 		for k1, z1 := range z {
@@ -472,8 +490,7 @@ Below are a few posts selected for this scope of publications. The articles in t
 
 <div class="text-justify">
 `
-	const endtext string = `
-</div>
+	const endtext string = `</div>
 
 <div class="text-center">
 
@@ -482,7 +499,7 @@ Below are a few posts selected for this scope of publications. The articles in t
 
 ### The motivation of the day: Overcoming Obstacles and Achieving Success
 
- 
+	
 <div class="text-center">
 
 
@@ -498,7 +515,8 @@ Below are a few posts selected for this scope of publications. The articles in t
 
 <div class="text-center">
 
-https://youtu.be/BYEdW7l3kxQ
+https://www.youtube.com/watch?v=olodT2jiNHA
+
 </div>
 
 
@@ -520,11 +538,17 @@ Please kindly click on this link above to Vote Our Witness.
 </div>
 
 
-## The strength of the wolves is the pack and the strength of the pack is the wolves.
-### All for one and one for all.
-#### BLURT belongs to all of us.
+### The strength of the wolves is the pack and the strength of the pack is the wolves.
+
+<div class="text-center">
+
+### **All for one and one for all.**
+#### *BLURT belongs to all of us.*
 ##### Let us all join hands and give blurt more value.
 
+</div>
+
+--
 
 <div class="text-center">
 
@@ -542,7 +566,7 @@ Please kindly click on this link above to Vote Our Witness.
 <div class="text-center">
 
 # ***STAY TUNED FOR MORE***
-
+	
 </div>
 
 BLURTCONNECT-NG LARGE SCOPE CONTENTS REPORT N# // 2% to Null

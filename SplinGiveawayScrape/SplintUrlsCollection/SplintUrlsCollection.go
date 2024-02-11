@@ -88,17 +88,20 @@ func scrapesource(url string) map[string][]string {
 	}
 
 	sourcescrape := doc.Find("#content").Text()
-	//fmt.Println("We have something", sourcescrape)
+	//fmt.Println("We have something Urlscollection", sourcescrape)
 
-	reg := regexp.MustCompile("^.+Sig.+\n\n.+\n")
+	//reg := regexp.MustCompile("^.+Sig.+\n\n.+\n")
+	//sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
 
-	sourcescrape = reg.ReplaceAllLiteralString(sourcescrape, "")
+	reg := regexp.MustCompile("..communit.+result......")
+
+	sourcescrape1 := reg.FindAllString(sourcescrape, 1)
 
 	//fmt.Println("We have something", sourcescrape)
 
 	var groupdata brutedata
 
-	err2 := json.Unmarshal([]byte(sourcescrape), &groupdata)
+	err2 := json.Unmarshal([]byte(sourcescrape1[0]), &groupdata)
 
 	if err2 != nil {
 		fmt.Println(err)
@@ -137,6 +140,7 @@ func (stock *product) collectedata(data map[string][]string) []string {
 				if !reg.MatchString(authValue) && authValue != "" {
 					reg2 := regexp.MustCompile(".+@")
 					v1 := reg2.ReplaceAllString(authValue, "https://hive.blog/@")
+
 					if v1 != "" {
 
 						stock.Url = v1

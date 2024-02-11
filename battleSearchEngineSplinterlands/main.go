@@ -1,7 +1,7 @@
 package main
 
 import (
-	ArrangeData "github.com/kakaw2016/goscrape/battleSearchEngineSplinterlands/arrangeData"
+	"github.com/kakaw2016/goscrape/battleSearchEngineSplinterlands/arrangeData"
 )
 
 func main() {

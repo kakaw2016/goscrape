@@ -1,6 +1,6 @@
 module github.com/kakaw2016/goscrape/SplinGiveawayScrape
 
-go 1.21.3
+go 1.21.5
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
